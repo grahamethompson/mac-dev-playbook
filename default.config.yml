@@ -1,7 +1,7 @@
 ---
-configure_dotfiles: true
-configure_terminal: true
-configure_osx: true
+configure_dotfiles: false
+configure_terminal: false
+configure_osx: false
 
 # Set to 'true' to configure the Dock via dockutil.
 configure_dock: false
@@ -34,51 +34,73 @@ dotfiles_files:
   - .vimrc
 
 homebrew_installed_packages:
-  # - ansible # Installed via Pip.
+  - act
+  - asdf
   - autoconf
-  - bash-completion
-  - doxygen
-  - gettext
-  - gifsicle
+  - bison
+  - colima
+  - coreutils
+  - curl
+  - ddev/ddev/ddev
+  - docker
+  - docker-buildx
+  - dotenvx/brew/dotenvx
+  - gd
   - git
   - gh
   - go
-  - gpg
-  - httpie
-  - iperf
-  - libevent
-  - sqlite
-  - nmap
-  - node
-  - nvm
-  - php
-  - pngpaste
-  - ssh-copy-id
-  - readline
-  - openssl
-  - pv
+  - icu4c@78
+  - jpeg
+  - krb5
+  - libedit
+  - libiconv
+  - libsodium
+  - libxml2
+  - libzip
+  - oniguruma
+  - pipx
+  - pkgconf
+  - pnpm
+  - re2c
+  - upsun/tap/upsun-cli
   - wget
-  - wrk
-  - zsh-history-substring-search
 
-homebrew_taps: []
+homebrew_taps:
+  - ddev/ddev
+  - dotenvx/brew
+  - upsun/tap
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
+  - bitwarden
+  - blackhole-2ch
+  - chatgpt
   - chromedriver
-  - docker
+  - claude-code
+  - codex
+  - codex-app
+  - copilot-cli
   - dropbox
   - firefox
-  - google-chrome
-  - handbrake
+  - github
+  - handbrake-app
+  - iterm2
   - licecap
+  - obsidian
+  - open-webui
+  - phpstorm
+  - protonvpn
   - sequel-ace
   - slack
+  - sourcetree
+  - stats
   - sublime-text
   - transmit
+  - visual-studio-code
 
 # See `geerlingguy.mac.mas` role documentation for usage instructions.
 mas_installed_apps: []
+mas_installed_app_ids: []
 mas_email: ""
 mas_password: ""
 
@@ -104,6 +126,12 @@ pip_packages: []
 #   state: present # present/absent/latest, default: present
 #   version: "0.16.3" # default: N/A
 
+asdf_runtimes:
+  - name: nodejs
+    version: "22.22.2"
+  - name: php
+    version: "8.3.30"
+
 # Set to 'true' to configure Sublime Text.
 configure_sublime: false
 sublime_base_path: "~/Library/Application Support/Sublime Text"
@@ -123,4 +151,5 @@ sublime_package_control:
   - "WordingStatus"
 
 # Glob pattern to ansible task files to run after all other tasks are finished.
-post_provision_tasks: []
+post_provision_tasks:
+  - "{{ playbook_dir }}/tasks/local-asdf-runtimes.yml"

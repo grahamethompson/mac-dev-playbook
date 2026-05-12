@@ -1,0 +1,47 @@
+---
+- name: Ensure asdf shims are available in zsh login shells.
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.zprofile"
+    line: 'export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"'
+    insertafter: '^eval "\$\(/opt/homebrew/bin/brew shellenv zsh\)"'
+    create: true
+    mode: "0644"
+  become: false
+
+- name: Check installed asdf plugins.
+  command: asdf plugin list
+  register: asdf_plugin_list
+  changed_when: false
+  become: false
+
+- name: Install configured asdf plugins.
+  command: "asdf plugin add {{ item.name }}"
+  when: item.name not in asdf_plugin_list.stdout_lines
+  loop: "{{ asdf_runtimes }}"
+  become: false
+
+- name: Check configured asdf runtime versions.
+  command: "asdf where {{ item.name }} {{ item.version }}"
+  register: asdf_runtime_where
+  changed_when: false
+  failed_when: false
+  loop: "{{ asdf_runtimes }}"
+  become: false
+
+- name: Install configured asdf runtime versions.
+  command: "asdf install {{ item.item.name }} {{ item.item.version }}"
+  when: item.rc != 0
+  loop: "{{ asdf_runtime_where.results }}"
+  become: false
+
+- name: Set configured asdf runtime versions as user defaults.
+  command: "asdf set -u {{ item.name }} {{ item.version }}"
+  changed_when: false
+  loop: "{{ asdf_runtimes }}"
+  become: false
+
+- name: Refresh asdf runtime shims.
+  command: "asdf reshim {{ item.name }} {{ item.version }}"
+  changed_when: false
+  loop: "{{ asdf_runtimes }}"
+  become: false

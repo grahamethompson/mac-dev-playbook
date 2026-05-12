@@ -1,19 +1,19 @@
-<img src="https://raw.githubusercontent.com/geerlingguy/mac-dev-playbook/master/files/Mac-Dev-Playbook-Logo.png" width="250" height="156" alt="Mac Dev Playbook Logo" />
+<img src="files/Mac-Dev-Playbook-Logo.png" width="250" height="156" alt="Mac Dev Playbook Logo" />
 
-# Mac Development Ansible Playbook
+# Graham's Mac Development Ansible Playbook
 
 [![CI][badge-gh-actions]][link-gh-actions]
 
-This playbook installs and configures most of the software I use on my Mac for web and software development. Some things in macOS are slightly difficult to automate, so I still have a few manual installation steps, but at least it's all documented here.
+This playbook installs and configures the software I use on my Mac for local web and software development. The default configuration in `default.config.yml` reflects the current local environment in this checkout: Homebrew-managed developer tools, Colima/Docker CLI, DDEV, asdf-managed Node.js and PHP, and the desktop apps I use day to day.
 
 ## Installation
 
   1. Ensure Apple's command line tools are installed (`xcode-select --install` to launch the installer).
-  2. [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/index.html):
+  2. [Install Ansible](https://docs.ansible.com/ansible/latest/installation_guide/index.html). This Mac currently uses `pipx`:
 
-     1. Run the following command to add Python 3 to your $PATH: `export PATH="$HOME/Library/Python/3.9/bin:/opt/homebrew/bin:$PATH"`
-     2. Upgrade Pip: `sudo pip3 install --upgrade pip`
-     3. Install Ansible: `pip3 install ansible`
+     1. Install `pipx` if needed: `brew install pipx`
+     2. Install Ansible: `pipx install ansible`
+     3. Ensure the `pipx` binary directory is on your path: `pipx ensurepath`
 
   3. Clone or download this repository to your local drive.
   4. Run `ansible-galaxy install -r requirements.yml` inside this directory to install required Ansible roles.
@@ -42,7 +42,7 @@ If you need to supply an SSH password (if you don't use SSH keys), make sure to 
 
 ### Running a specific set of tagged tasks
 
-You can filter which part of the provisioning process to run by specifying a set of tags using `ansible-playbook`'s `--tags` flag. The tags available are `dotfiles`, `homebrew`, `mas`, `extra-packages` and `osx`.
+You can filter which part of the provisioning process to run by specifying a set of tags using `ansible-playbook`'s `--tags` flag. The tags available are `dotfiles`, `homebrew`, `mas`, `dock`, `sudoers`, `terminal`, `extra-packages`, `sublime-text`, `osx`, and `post`.
 
     ansible-playbook main.yml -K --tags "dotfiles,homebrew"
 
@@ -94,60 +94,78 @@ Any variable can be overridden in `config.yml`; see the supporting roles' docume
 
 Applications (installed with Homebrew Cask):
 
+  - [Bitwarden](https://bitwarden.com/)
+  - [BlackHole 2ch](https://existential.audio/blackhole/)
+  - [ChatGPT](https://openai.com/chatgpt/download/)
   - [ChromeDriver](https://sites.google.com/chromium.org/driver/)
-  - [Docker](https://www.docker.com/)
+  - [Claude Code](https://www.anthropic.com/claude-code)
+  - [Codex CLI](https://github.com/openai/codex)
+  - [Codex app](https://openai.com/codex/)
+  - [Copilot CLI](https://github.com/github/copilot-cli)
   - [Dropbox](https://www.dropbox.com/)
   - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
-  - [Google Chrome](https://www.google.com/chrome/)
   - [Handbrake](https://handbrake.fr/)
-  - [Homebrew](http://brew.sh/)
+  - [GitHub Desktop](https://desktop.github.com/)
+  - [iTerm2](https://iterm2.com/)
   - [LICEcap](http://www.cockos.com/licecap/)
-  - [nvALT](http://brettterpstra.com/projects/nvalt/)
+  - [Obsidian](https://obsidian.md/)
+  - [Open WebUI](https://openwebui.com/)
+  - [PhpStorm](https://www.jetbrains.com/phpstorm/)
+  - [Proton VPN](https://protonvpn.com/)
   - [Sequel Ace](https://sequel-ace.com) (MySQL client)
   - [Slack](https://slack.com/)
+  - [SourceTree](https://www.sourcetreeapp.com/)
+  - [Stats](https://github.com/exelban/stats)
   - [Sublime Text](https://www.sublimetext.com/)
   - [Transmit](https://panic.com/transmit/) (S/FTP client)
+  - [Visual Studio Code](https://code.visualstudio.com/)
 
 Packages (installed with Homebrew):
 
+  - act
+  - asdf
   - autoconf
-  - bash-completion
-  - doxygen
-  - gettext
-  - gifsicle
+  - bison
+  - colima
+  - coreutils
+  - curl
+  - ddev
+  - docker
+  - docker-buildx
+  - dotenvx
+  - gd
   - git
   - gh
   - go
-  - gpg
-  - httpie
-  - iperf
-  - libevent
-  - sqlite
-  - nmap
-  - node
-  - nvm
-  - php
-  - ssh-copy-id
-  - readline
-  - openssl
-  - pv
+  - pipx
+  - pnpm
+  - upsun-cli
   - wget
-  - wrk
-  - zsh-history-substring-search
 
-My [dotfiles](https://github.com/geerlingguy/dotfiles) are also installed into the current user's home directory, including the `.osx` dotfile for configuring many aspects of macOS for better performance and ease of use. You can disable dotfiles management by setting `configure_dotfiles: no` in your configuration.
+Language runtimes:
 
-Finally, there are a few other preferences and settings added on for various apps and services.
+  - Node.js 22.22.2 via asdf
+  - PHP 8.3.30 via asdf
+
+Homebrew taps:
+
+  - ddev/ddev
+  - dotenvx/brew
+  - upsun/tap
+
+Dotfiles, macOS defaults, Terminal profile, Dock management, and Sublime Text settings are supported by the playbook but disabled by default for this local environment. Enable them with the corresponding `configure_*` variables in `config.yml`.
+
+Finally, the post-provision step installs the configured asdf plugins and sets the default Node.js and PHP versions.
 
 ## Full / From-scratch setup guide
 
-Since I've used this playbook to set up something like 20 different Macs, I decided to write up a full 100% from-scratch install for my own reference (everyone's particular install will be slightly different).
+The from-scratch setup guide captures the remaining manual steps for a new Mac after the automated playbook run.
 
 You can see my full from-scratch setup document here: [full-mac-setup.md](full-mac-setup.md).
 
 ## Testing the Playbook
 
-Many people have asked me if I often wipe my entire workstation and start from scratch just to test changes to the playbook. Nope! This project is [continuously tested on GitHub Actions' macOS infrastructure](https://github.com/geerlingguy/mac-dev-playbook/actions?query=workflow%3ACI).
+This project can be tested on GitHub Actions' macOS infrastructure.
 
 You can also run macOS itself inside a VM, for at least some of the required testing (App Store apps and some proprietary software might not install properly). I currently recommend:
 
@@ -158,9 +176,9 @@ You can also run macOS itself inside a VM, for at least some of the required tes
 
 Check out [Ansible for DevOps](https://www.ansiblefordevops.com/), which teaches you how to automate almost anything with Ansible.
 
-## Author
+## Credits
 
-This project was created by [Jeff Geerling](https://www.jeffgeerling.com/) (originally inspired by [MWGriffin/ansible-playbooks](https://github.com/MWGriffin/ansible-playbooks)).
+This playbook is based on [Jeff Geerling's Mac Dev Playbook](https://github.com/geerlingguy/mac-dev-playbook), originally inspired by [MWGriffin/ansible-playbooks](https://github.com/MWGriffin/ansible-playbooks).
 
-[badge-gh-actions]: https://github.com/geerlingguy/mac-dev-playbook/actions/workflows/ci.yml/badge.svg
-[link-gh-actions]: https://github.com/geerlingguy/mac-dev-playbook/actions/workflows/ci.yml
+[badge-gh-actions]: https://github.com/grahamethompson/mac-dev-playbook/actions/workflows/ci.yml/badge.svg
+[link-gh-actions]: https://github.com/grahamethompson/mac-dev-playbook/actions/workflows/ci.yml
