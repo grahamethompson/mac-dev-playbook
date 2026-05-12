@@ -1,6 +1,6 @@
 <img src="files/Mac-Dev-Playbook-Logo.png" width="250" height="156" alt="Mac Dev Playbook Logo" />
 
-# Graham's Mac Development Ansible Playbook
+# Grahame's Mac Development Ansible Playbook
 
 [![CI][badge-gh-actions]][link-gh-actions]
 
