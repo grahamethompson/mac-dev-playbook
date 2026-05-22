@@ -45,25 +45,34 @@ homebrew_installed_packages:
   - docker
   - docker-buildx
   - dotenvx/brew/dotenvx
+  - freetype
   - gd
-  - git
+  - gettext
   - gh
+  - git
   - go
   - icu4c@78
   - jpeg
   - krb5
   - libedit
   - libiconv
+  - libpng
   - libsodium
+  - libtiff
   - libxml2
   - libzip
+  - mkcert
   - oniguruma
+  - openssl@3
+  - pandoc
+  - pcre2
   - pipx
   - pkgconf
   - pnpm
   - re2c
   - upsun/tap/upsun-cli
   - wget
+  - yarn
 
 homebrew_taps:
   - ddev/ddev
@@ -72,6 +81,7 @@ homebrew_taps:
 
 homebrew_cask_appdir: /Applications
 homebrew_cask_apps:
+  - basictex
   - bitwarden
   - blackhole-2ch
   - chatgpt
@@ -85,6 +95,7 @@ homebrew_cask_apps:
   - github
   - handbrake-app
   - iterm2
+  - libreoffice
   - licecap
   - obsidian
   - open-webui
@@ -93,6 +104,7 @@ homebrew_cask_apps:
   - sequel-ace
   - slack
   - sourcetree
+  - spotify
   - stats
   - sublime-text
   - transmit

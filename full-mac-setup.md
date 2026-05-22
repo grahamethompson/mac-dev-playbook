@@ -42,10 +42,10 @@ The playbook installs the current local development stack:
 
   - Homebrew taps: `ddev/ddev`, `dotenvx/brew`, `upsun/tap`
   - Container tooling: Colima, Docker CLI, Docker Buildx
-  - Local web tooling: DDEV, mkcert dependency chain through Homebrew where needed
-  - Language tooling: asdf, Node.js 22.22.2, PHP 8.3.30, pnpm
-  - CLI tooling: git, gh, act, dotenvx, upsun-cli, pipx, wget
-  - Desktop apps: Bitwarden, ChatGPT, Claude Code, Codex, Dropbox, Firefox, GitHub Desktop, iTerm2, Obsidian, PhpStorm, Proton VPN, Sequel Ace, Slack, SourceTree, Stats, Sublime Text, Transmit, VS Code, and the other casks listed in `default.config.yml`
+  - Local web tooling: DDEV, mkcert, and Homebrew build/runtime dependencies used by the PHP and image-processing stack
+  - Language tooling: asdf, Node.js 22.22.2, PHP 8.3.30, pnpm, yarn
+  - CLI tooling: git, gh, act, dotenvx, upsun-cli, pandoc, pipx, wget
+  - Desktop apps: BasicTeX, Bitwarden, ChatGPT, Claude Code, Codex, Dropbox, Firefox, GitHub Desktop, iTerm2, LibreOffice, Obsidian, PhpStorm, Proton VPN, Sequel Ace, Slack, SourceTree, Spotify, Stats, Sublime Text, Transmit, VS Code, and the other casks listed in `default.config.yml`
 
 ## After the Playbook
 

@@ -94,6 +94,7 @@ Any variable can be overridden in `config.yml`; see the supporting roles' docume
 
 Applications (installed with Homebrew Cask):
 
+  - [BasicTeX](https://tug.org/mactex/morepackages.html)
   - [Bitwarden](https://bitwarden.com/)
   - [BlackHole 2ch](https://existential.audio/blackhole/)
   - [ChatGPT](https://openai.com/chatgpt/download/)
@@ -107,6 +108,7 @@ Applications (installed with Homebrew Cask):
   - [Handbrake](https://handbrake.fr/)
   - [GitHub Desktop](https://desktop.github.com/)
   - [iTerm2](https://iterm2.com/)
+  - [LibreOffice](https://www.libreoffice.org/)
   - [LICEcap](http://www.cockos.com/licecap/)
   - [Obsidian](https://obsidian.md/)
   - [Open WebUI](https://openwebui.com/)
@@ -115,6 +117,7 @@ Applications (installed with Homebrew Cask):
   - [Sequel Ace](https://sequel-ace.com) (MySQL client)
   - [Slack](https://slack.com/)
   - [SourceTree](https://www.sourcetreeapp.com/)
+  - [Spotify](https://www.spotify.com/)
   - [Stats](https://github.com/exelban/stats)
   - [Sublime Text](https://www.sublimetext.com/)
   - [Transmit](https://panic.com/transmit/) (S/FTP client)
@@ -133,14 +136,34 @@ Packages (installed with Homebrew):
   - docker
   - docker-buildx
   - dotenvx
+  - freetype
   - gd
-  - git
+  - gettext
   - gh
+  - git
   - go
+  - icu4c@78
+  - jpeg
+  - krb5
+  - libedit
+  - libiconv
+  - libpng
+  - libsodium
+  - libtiff
+  - libxml2
+  - libzip
+  - mkcert
+  - oniguruma
+  - openssl@3
+  - pandoc
+  - pcre2
   - pipx
   - pnpm
+  - pkgconf
+  - re2c
   - upsun-cli
   - wget
+  - yarn
 
 Language runtimes:
 
