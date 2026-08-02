@@ -35,6 +35,7 @@ dotfiles_files:
 
 homebrew_installed_packages:
   - act
+  - ahoy
   - asdf
   - autoconf
   - bison
@@ -44,13 +45,16 @@ homebrew_installed_packages:
   - ddev/ddev/ddev
   - docker
   - docker-buildx
+  - docker-compose
   - dotenvx/brew/dotenvx
   - freetype
   - gd
   - gettext
   - gh
   - git
+  - glab
   - go
+  - go-task
   - icu4c@78
   - jpeg
   - krb5
@@ -69,7 +73,10 @@ homebrew_installed_packages:
   - pipx
   - pkgconf
   - pnpm
+  - pygmystack/pygmy/pygmy
   - re2c
+  - ripgrep
+  - tree
   - upsun/tap/upsun-cli
   - wget
   - yarn
@@ -77,6 +84,7 @@ homebrew_installed_packages:
 homebrew_taps:
   - ddev/ddev
   - dotenvx/brew
+  - pygmystack/pygmy
   - upsun/tap
 
 homebrew_cask_appdir: /Applications
@@ -92,11 +100,13 @@ homebrew_cask_apps:
   - copilot-cli
   - dropbox
   - firefox
+  - gcloud-cli
   - github
   - handbrake-app
   - iterm2
   - libreoffice
   - licecap
+  - ngrok
   - obsidian
   - open-webui
   - phpstorm
@@ -129,7 +139,13 @@ gem_packages: []
 # - name: bundler
 #   state: present # present/absent/latest, default: present
 #   version: "~> 1.15.1" # default: N/A
-npm_packages: []
+npm_packages:
+  - name: "@mermaid-js/mermaid-cli"
+    executable: "{{ lookup('env', 'HOME') }}/.asdf/shims/npm"
+  - name: katex
+    executable: "{{ lookup('env', 'HOME') }}/.asdf/shims/npm"
+  - name: playwright
+    executable: "{{ lookup('env', 'HOME') }}/.asdf/shims/npm"
 # - name: webpack
 #   state: present # present/absent/latest, default: present
 #   version: "^2.6" # default: N/A
@@ -163,5 +179,4 @@ sublime_package_control:
   - "WordingStatus"
 
 # Glob pattern to ansible task files to run after all other tasks are finished.
-post_provision_tasks:
-  - "{{ playbook_dir }}/tasks/local-asdf-runtimes.yml"
+post_provision_tasks: []

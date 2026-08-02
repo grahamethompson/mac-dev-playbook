@@ -39,6 +39,10 @@
       when: configure_osx
       tags: ['osx']
 
+    - import_tasks: tasks/local-asdf-runtimes.yml
+      when: asdf_runtimes | default([]) | length > 0
+      tags: ['runtimes', 'extra-packages']
+
     - import_tasks: tasks/extra-packages.yml
       tags: ['extra-packages']
 

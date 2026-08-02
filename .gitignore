@@ -4,3 +4,10 @@
 *.retry
 roles*
 config.yml
+
+# Keep local credentials and environment overrides out of version control.
+.env
+.env.*
+!.env.example
+secrets.yml
+vault-password*

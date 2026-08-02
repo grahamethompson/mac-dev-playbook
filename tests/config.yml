@@ -13,3 +13,9 @@ homebrew_installed_packages:
 homebrew_cask_apps:
   - firefox
   - licecap
+
+# Keep the integration test focused on the packages above. Runtime and global
+# package installation are covered by syntax/lint checks and require asdf.
+asdf_runtimes: []
+npm_packages: []
+post_provision_tasks: []

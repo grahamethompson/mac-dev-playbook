@@ -42,7 +42,7 @@ If you need to supply an SSH password (if you don't use SSH keys), make sure to 
 
 ### Running a specific set of tagged tasks
 
-You can filter which part of the provisioning process to run by specifying a set of tags using `ansible-playbook`'s `--tags` flag. The tags available are `dotfiles`, `homebrew`, `mas`, `dock`, `sudoers`, `terminal`, `extra-packages`, `sublime-text`, `osx`, and `post`.
+You can filter which part of the provisioning process to run by specifying a set of tags using `ansible-playbook`'s `--tags` flag. The tags available are `dotfiles`, `homebrew`, `mas`, `dock`, `sudoers`, `terminal`, `runtimes`, `extra-packages`, `sublime-text`, `osx`, and `post`.
 
     ansible-playbook main.yml -K --tags "dotfiles,homebrew"
 
@@ -92,7 +92,7 @@ Any variable can be overridden in `config.yml`; see the supporting roles' docume
 
 ## Included Applications / Configuration (Default)
 
-Applications (installed with Homebrew Cask):
+Applications and command-line tools installed with Homebrew Cask:
 
   - [BasicTeX](https://tug.org/mactex/morepackages.html)
   - [Bitwarden](https://bitwarden.com/)
@@ -105,11 +105,13 @@ Applications (installed with Homebrew Cask):
   - [Copilot CLI](https://github.com/github/copilot-cli)
   - [Dropbox](https://www.dropbox.com/)
   - [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+  - [Google Cloud CLI](https://cloud.google.com/sdk/docs/install)
   - [Handbrake](https://handbrake.fr/)
   - [GitHub Desktop](https://desktop.github.com/)
   - [iTerm2](https://iterm2.com/)
   - [LibreOffice](https://www.libreoffice.org/)
   - [LICEcap](http://www.cockos.com/licecap/)
+  - [ngrok](https://ngrok.com/)
   - [Obsidian](https://obsidian.md/)
   - [Open WebUI](https://openwebui.com/)
   - [PhpStorm](https://www.jetbrains.com/phpstorm/)
@@ -126,6 +128,7 @@ Applications (installed with Homebrew Cask):
 Packages (installed with Homebrew):
 
   - act
+  - ahoy
   - asdf
   - autoconf
   - bison
@@ -135,13 +138,16 @@ Packages (installed with Homebrew):
   - ddev
   - docker
   - docker-buildx
+  - docker-compose
   - dotenvx
   - freetype
   - gd
   - gettext
   - gh
   - git
+  - glab
   - go
+  - go-task
   - icu4c@78
   - jpeg
   - krb5
@@ -158,9 +164,12 @@ Packages (installed with Homebrew):
   - pandoc
   - pcre2
   - pipx
-  - pnpm
   - pkgconf
+  - pnpm
+  - pygmy
   - re2c
+  - ripgrep
+  - tree
   - upsun-cli
   - wget
   - yarn
@@ -170,15 +179,24 @@ Language runtimes:
   - Node.js 22.22.2 via asdf
   - PHP 8.3.30 via asdf
 
+Global Node.js development tools:
+
+  - `@mermaid-js/mermaid-cli`
+  - `katex`
+  - `playwright`
+
 Homebrew taps:
 
   - ddev/ddev
   - dotenvx/brew
+  - pygmystack/pygmy
   - upsun/tap
 
 Dotfiles, macOS defaults, Terminal profile, Dock management, and Sublime Text settings are supported by the playbook but disabled by default for this local environment. Enable them with the corresponding `configure_*` variables in `config.yml`.
 
-Finally, the post-provision step installs the configured asdf plugins and sets the default Node.js and PHP versions.
+The runtime step installs the configured asdf plugins and versions before global language packages, so clean-machine provisioning does not depend on a pre-existing Node.js or PHP installation.
+
+Keep credentials and machine-specific overrides in the ignored `config.yml` or another ignored local file. Common `.env`, `secrets.yml`, and vault-password filenames are also ignored; do not add tokens or passwords to `default.config.yml`.
 
 ## Full / From-scratch setup guide
 

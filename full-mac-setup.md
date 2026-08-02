@@ -40,12 +40,12 @@ Before running the playbook:
 
 The playbook installs the current local development stack:
 
-  - Homebrew taps: `ddev/ddev`, `dotenvx/brew`, `upsun/tap`
-  - Container tooling: Colima, Docker CLI, Docker Buildx
-  - Local web tooling: DDEV, mkcert, and Homebrew build/runtime dependencies used by the PHP and image-processing stack
-  - Language tooling: asdf, Node.js 22.22.2, PHP 8.3.30, pnpm, yarn
-  - CLI tooling: git, gh, act, dotenvx, upsun-cli, pandoc, pipx, wget
-  - Desktop apps: BasicTeX, Bitwarden, ChatGPT, Claude Code, Codex, Dropbox, Firefox, GitHub Desktop, iTerm2, LibreOffice, Obsidian, PhpStorm, Proton VPN, Sequel Ace, Slack, SourceTree, Spotify, Stats, Sublime Text, Transmit, VS Code, and the other casks listed in `default.config.yml`
+  - Homebrew taps: `ddev/ddev`, `dotenvx/brew`, `pygmystack/pygmy`, `upsun/tap`
+  - Container tooling: Colima, Docker CLI, Docker Buildx, Docker Compose, and Pygmy
+  - Local web tooling: DDEV, Ahoy, mkcert, ngrok, and Homebrew build/runtime dependencies used by the PHP and image-processing stack
+  - Language tooling: asdf, Node.js 22.22.2, PHP 8.3.30, pnpm, yarn, Mermaid CLI, KaTeX, and Playwright
+  - CLI tooling: git, GitHub CLI, GitLab CLI, act, Task, ripgrep, tree, dotenvx, Google Cloud CLI, upsun-cli, pandoc, pipx, and wget
+  - Developer desktop apps: ChatGPT, Claude Code, Codex, Firefox, GitHub Desktop, iTerm2, Obsidian, PhpStorm, Sequel Ace, Sublime Text, Transmit, and VS Code; all managed casks are listed in `default.config.yml`
 
 ## After the Playbook
 
@@ -54,6 +54,7 @@ Some setup still needs a signed-in desktop session:
   - Start Colima if it is not running: `colima start`.
   - Confirm Docker is reachable: `docker version`.
   - Confirm DDEV can see Docker: `ddev version`.
+  - Authenticate Google Cloud CLI and ngrok as needed. Keep their generated credentials in their user-level config directories, never in this repository.
   - Sign in to Dropbox and allow it to finish syncing.
   - Sign in to Bitwarden, GitHub Desktop, Slack, PhpStorm, Proton VPN, Transmit, and any other account-backed apps.
   - Open Obsidian and connect the local vault location.
